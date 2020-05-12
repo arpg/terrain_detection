@@ -3,7 +3,7 @@ project(terrain_detection)
 
 find_package(catkin REQUIRED)
 
-find_package(catkin REQUIRED 
+find_package(catkin REQUIRED
         cv_bridge
         dynamic_reconfigure
         image_geometry
@@ -14,7 +14,9 @@ find_package(catkin REQUIRED
         sensor_msgs
         message_generation
         pcl_ros
-        pcl_conversions)
+        pcl_conversions
+        laser_geometry
+        tf)
 find_package(OpenCV REQUIRED)
 find_package(Boost REQUIRED COMPONENTS thread)
 
@@ -60,7 +62,7 @@ include_directories(include ${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
 add_definitions(-DOPENCV_TRAITS_ENABLE_DEPRECATED)
 
 # Nodelet library
-add_library(${PROJECT_NAME}     
+add_library(${PROJECT_NAME}
 src/nodelets/terrain_detection_nodelet.cpp
 )
 add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencfg ${PROJECT_NAME}_generate_messages_cpp)
@@ -81,3 +83,6 @@ install(DIRECTORY launch
         DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/
 )
 
+#add_library(laserscan2pcl src/laserscan2pcl.cpp)
+add_executable(laserscan2pcl src/laserscan2pcl.cpp)
+target_link_libraries(laserscan2pcl ${catkin_LIBRARIES} ${Boost_LIBRARIES})
