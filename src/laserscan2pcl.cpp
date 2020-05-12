@@ -44,6 +44,7 @@ void My_Filter::scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan){
     cloud_pcl3 = cloud_pcl;
     cloud_pcl4 = cloud_pcl;
 
+
     //ROS_INFO("%f", cloud_pcl.points.size());
     if (cloud_pcl.points.size() > 0){
         for(std::size_t i=0; i<cloud_pcl.points.size(); i++){
@@ -58,6 +59,7 @@ void My_Filter::scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan){
         pcl::toROSMsg(cloud_pcl2, output);
         point_cloud_publisher_.publish(output);
     }
+
 }
 
 

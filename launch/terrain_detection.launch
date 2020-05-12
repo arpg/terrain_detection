@@ -281,7 +281,9 @@
         <node pkg="nodelet" type="nodelet" name="terrain_center_pcl2laser" args="load pointcloud_to_laserscan/pointcloud_to_laserscan_nodelet standalone_nodelet" output="screen" if="$(arg enable_terrain_pipeline_center)">
             <remap from="cloud_in" to="terrain_detection/pcl_out_center"/>
             <remap from="scan" to="terrain_detection/scan_out_center"/>
-            <param name="target_frame" type="str" value="$(arg vehicle)/base_link_elevated" />
+
+            <param name="target_frame" type="str" value="$(arg vehicle)/base_link" />
+
             <param name="min_height" type="double" value="-10.0" />
             <param name="max_height" type="double" value="10.0" />
             <param name="min_range" type="double" value="0" />
@@ -324,6 +326,5 @@
       <param name="vehicle_name" value="$(arg vehicle)/base_link"/>
       <remap from="terrain_detection/laserscanPCL" to="octomap_in"/>
     </node>
-
 
 </launch>
