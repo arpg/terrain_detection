@@ -45,6 +45,7 @@
         <arg name="l_pf_r"                         	default="$(eval  arg('pf_roll') + 0.95 * arg('l_pf_y') * arg('l_pf_p'))"/> <!-- Left PicoFlexx Roll -->
 
         <node pkg="nodelet" type="nodelet" name="standalone_nodelet" args="manager" output="screen" />
+        <node pkg="tf2_ros" type="static_transform_publisher" name="baselinkshift" args=".48 0.0 0.0 0 0 0 1 /$(arg vehicle)/base_link /$(arg vehicle)/base_link_shift"/>
 
         <!-- Downsample / crop data -->
 
