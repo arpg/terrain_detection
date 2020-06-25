@@ -101,12 +101,12 @@
             <remap from="~pcl_out_1"    to="~pcl_out_right" />
             <remap from="~pcl_out_2"    to="~pcl_out_left" />
             <rosparam>
-                transform_pcl_yaw_1:     -3.1415  <!-- r_pf_y -->
-                transform_pcl_pitch_1:    1.0473  <!-- r_pf_p -->
-                transform_pcl_roll_1:    -2.7315  <!-- r_pf_r -->
-                transform_pcl_yaw_2:      3.1415  <!-- l_pf_y -->
-                transform_pcl_pitch_2:    1.0473  <!-- l_pf_p -->
-                transform_pcl_roll_2:     2.7315  <!-- l_pf_r -->
+                transform_pcl_yaw_1:     -0.4734  <!-- r_pf_y -->
+                transform_pcl_pitch_1:    0.5469  <!-- r_pf_p -->
+                transform_pcl_roll_1:    -1.8311  <!-- r_pf_r -->
+                transform_pcl_yaw_2:      0.4734  <!-- l_pf_y -->
+                transform_pcl_pitch_2:    0.5469  <!-- l_pf_p -->
+                transform_pcl_roll_2:     -1.3103  <!-- l_pf_r -->
                 normal_radius:            0.15  <!--  0.15 for Husky -->  <!--  0.10 for Track Bot -->
                 normal_x_LT_threshold:   -0.50
                 normal_x_GT_threshold:    0.50
