@@ -86,3 +86,6 @@ install(DIRECTORY launch
 #add_library(laserscan2pcl src/laserscan2pcl.cpp)
 add_executable(laserscan2pcl src/laserscan2pcl.cpp)
 target_link_libraries(laserscan2pcl ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+
+add_executable(concat_laserscan src/concat_laserscan.cpp)
+target_link_libraries(concat_laserscan ${catkin_LIBRARIES} ${Boost_LIBRARIES})
