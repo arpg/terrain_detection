@@ -111,6 +111,7 @@
       <param name="num_scan_points"      value="45"/>
       <param name="left_scan_limit"     value="-.5"/>
       <param name="right_scan_limit"     value="0.5"/>
+      <param name="scan_timeout_s"       value=".25"/>
     </node>
 
     <node pkg="terrain_detection" name="laserscan2pcl" type="laserscan2pcl" respawn="true" output="screen">

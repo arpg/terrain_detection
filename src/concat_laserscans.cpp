@@ -47,7 +47,7 @@ Concat_Laserscan::Concat_Laserscan(){
         nh.param("num_scan_points", num_scan_points_, 0);
         nh.param("right_scan_limit", right_scan_limit_, -0.5);
         nh.param("left_scan_limit", left_scan_limit_, 0.5);
-        nh.param("scan_timoue_s", scan_timeout_s_, 0.5);
+        nh.param("scan_timout_s", scan_timeout_s_, 0.5);
 
         scan_out_.angle_min = left_scan_limit_;
         scan_out_.angle_min = right_scan_limit_;
