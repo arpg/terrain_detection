@@ -12,7 +12,6 @@ find_package(catkin REQUIRED
         nodelet_topic_tools
         roscpp
         sensor_msgs
-        message_generation
         pcl_ros
         pcl_conversions
         laser_geometry
@@ -24,17 +23,17 @@ if(cv_bridge_VERSION VERSION_GREATER "1.12.0")
   add_compile_options(-std=c++11)
 endif()
 
-add_message_files(
-	DIRECTORY
-	msg
-	FILES
-)
+#add_message_files(
+#	DIRECTORY
+#	msg
+#	FILES
+#)
 
-generate_messages(DEPENDENCIES
-        std_msgs
-        geometry_msgs
-        sensor_msgs
-)
+#generate_messages(DEPENDENCIES
+#        std_msgs
+#        geometry_msgs
+#        sensor_msgs
+#)
 
 # Dynamic reconfigure support
 generate_dynamic_reconfigure_options(
@@ -46,7 +45,6 @@ catkin_package(
         image_geometry
         roscpp
         sensor_msgs
-        message_runtime
         DEPENDS
         OpenCV
         INCLUDE_DIRS
@@ -65,7 +63,7 @@ add_definitions(-DOPENCV_TRAITS_ENABLE_DEPRECATED)
 add_library(${PROJECT_NAME}
 src/nodelets/terrain_detection_nodelet.cpp
 )
-add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencfg ${PROJECT_NAME}_generate_messages_cpp)
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_gencfg)
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${OpenCV_LIBRARIES})
 
 install(TARGETS ${PROJECT_NAME}
@@ -87,5 +85,5 @@ install(DIRECTORY launch
 add_executable(laserscan2pcl src/laserscan2pcl.cpp)
 target_link_libraries(laserscan2pcl ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
-add_executable(concat_laserscan src/concat_laserscan.cpp)
-target_link_libraries(concat_laserscan ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_executable(concat_laserscans src/concat_laserscans.cpp)
+target_link_libraries(concat_laserscans ${catkin_LIBRARIES} ${Boost_LIBRARIES})
