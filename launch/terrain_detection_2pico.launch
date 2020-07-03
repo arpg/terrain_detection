@@ -87,8 +87,8 @@
         <param name="min_range" type="double" value="0" />
         <param name="max_range" type="double" value="1000" />
         <param name="angle_min" type="double" value="-0.78539816339" /> <!-- 1.1780972451 -->
-        <param name="angle_max" type="double" value="0.78539816339" /> <!-- 1.96349540849 -->
-        <param name="angle_increment" type="double" value="0.0174533" />
+        <param name="angle_max" type="double" value="0.0" /> <!-- 1.96349540849 -->
+        <param name="angle_increment" type="double" value="0.00873" />
         <param name="use_inf" type="boolean" value="true" />
     </node>
 
@@ -100,20 +100,21 @@
         <param name="max_height" type="double" value="10.0" />
         <param name="min_range" type="double" value="0" />
         <param name="max_range" type="double" value="1000" />
-        <param name="angle_min" type="double" value="-0.78539816339" /> <!-- 1.1780972451 -->
+        <param name="angle_min" type="double" value="0.0" /> <!-- 1.1780972451 -->
         <param name="angle_max" type="double" value="0.78539816339" /> <!-- 1.96349540849 -->
-        <param name="angle_increment" type="double" value="0.0174533" />
+        <param name="angle_increment" type="double" value="0.00873" />
         <param name="use_inf" type="boolean" value="true" />
     </node>
-
-    <node pkg="terrain_detection" name="concat_laserscans" type="concat_laserscan" respawn="true" output="screen">
+<!--
+    <node pkg="terrain_detection" name="concat_laserscans" type="concat_laserscans" respawn="true" output="screen">
       <param name="publish_rate"         value="10"/>
       <param name="num_scan_points"      value="45"/>
       <param name="left_scan_limit"     value="-.5"/>
       <param name="right_scan_limit"     value="0.5"/>
       <param name="scan_timeout_s"       value=".25"/>
+      <param name="vehicle_name"       value="T02"/>
     </node>
-
+-->
     <node pkg="terrain_detection" name="laserscan2pcl" type="laserscan2pcl" respawn="true" output="screen">
       <param name="vehicle_name" value="$(arg vehicle)/base_link"/>
       <remap from="terrain_detection/laserscanPCL" to="octomap_in"/>
