@@ -105,16 +105,16 @@
         <param name="angle_increment" type="double" value="0.00873" />
         <param name="use_inf" type="boolean" value="true" />
     </node>
-<!--
+
     <node pkg="terrain_detection" name="concat_laserscans" type="concat_laserscans" respawn="true" output="screen">
       <param name="publish_rate"         value="10"/>
-      <param name="num_scan_points"      value="45"/>
-      <param name="left_scan_limit"     value="-.5"/>
-      <param name="right_scan_limit"     value="0.5"/>
+      <param name="num_scan_points"      value="90"/>
+      <param name="left_scan_limit"      value="-0.785"/>
+      <param name="right_scan_limit"     value="0.785"/>
       <param name="scan_timeout_s"       value=".25"/>
-      <param name="vehicle_name"       value="T02"/>
+      <param name="vehicle_name"         value="H01"/>
     </node>
--->
+
     <node pkg="terrain_detection" name="laserscan2pcl" type="laserscan2pcl" respawn="true" output="screen">
       <param name="vehicle_name" value="$(arg vehicle)/base_link"/>
       <remap from="terrain_detection/laserscanPCL" to="octomap_in"/>
