@@ -53,7 +53,7 @@ Concat_Laserscan::Concat_Laserscan(){
         nh.param("left_scan_limit", left_scan_limit_, -0.785);
         nh.param("scan_timout_s", scan_timeout_s_, 0.25);
         auto tf_prefix = nh.param("vehicle_name", std::string{});
-        tf_prefix = "H01";
+        //tf_prefix = "H01";
         auto scan_frame = tf_prefix + "/base_link";
 
         //ROS_INFO("%d", num_scan_points_);
