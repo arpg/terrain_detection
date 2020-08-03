@@ -1,6 +1,6 @@
 <launch>
 
-    <arg name="vehicle" default="T02"/>
+    <arg name="vehicle" default="H01"/>
     <node pkg="nodelet" type="nodelet" name="standalone_nodelet" args="manager" output="screen" />
 
     <!-- Downsample / crop data -->
