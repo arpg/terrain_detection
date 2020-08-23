@@ -49,11 +49,44 @@
         <arg name="r_pf_r"                         	default="$(eval  arg('pf_roll') + 0.95 * arg('r_pf_y') * arg('r_pf_p'))"/> <!-- Right PicoFlexx Roll -->
         <arg name="l_pf_r"                         	default="$(eval  arg('pf_roll') + 0.95 * arg('l_pf_y') * arg('l_pf_p'))"/> <!-- Left PicoFlexx Roll -->
 
+    <!--    <node pkg="tf" type="static_transform_publisher" name="body2terrain_center"     args="0 0             0 0             $(arg c_rs_p) 0             /base_link /terrain_center_camera_link  100" if="$(arg enable_terrain_center_tf_pub)"/>
+-->
+        <node pkg="tf" type="static_transform_publisher" name="body2terrain_right"      args="0 $(arg r_pf_d) 0 $(arg r_pf_y) $(arg r_pf_p) $(arg r_pf_r) /base_link /terrain_right_camera_link   100" if="$(arg enable_terrain_left_tf_pub)"/>
+        <!-- <node pkg="tf" type="static_transform_publisher" name="body2terrain_left"       args="0 $(arg l_pf_d) 0 $(arg l_pf_y) $(arg l_pf_p) $(arg l_pf_r) /base_link /terrain_left_camera_link    100" if="$(arg enable_terrain_right_tf_pub)"/> -->
+<!--
+        <node pkg="tf" type="static_transform_publisher" name="body2terrain_center"          args="0  0     0  0              0.78539816339  0             /base_link /fore_camera_link          100" if="$(arg enable_terrain_center_tf_pub)"/>
+        <node pkg="tf" type="static_transform_publisher" name="body2terrain_right" args="0 -0.02  0 -0.55544424568  0.78539816339  1.15636368089 /base_link /terrain_right_camera_link 100" if="$(arg enable_terrain_left_tf_pub)"/>
+        <node pkg="tf" type="static_transform_publisher" name="body2terrain_left"   args="0  0.02  0  0.55544424568  0.78539816339  1.9852289727  /base_link /terrain_left_camera_link  100" if="$(arg enable_terrain_right_tf_pub)"/>
+-->
+
         <node pkg="tf" type="static_transform_publisher" name="base_link_2_elevated" args="0 0 .2 0 0 0 $(arg vehicle)/base_link $(arg vehicle)/base_link_elevated 10"/>
 
 
         <node pkg="nodelet" type="nodelet" name="standalone_nodelet" args="manager" output="screen" />
+<!--
+        <group ns="terrain_center">
+            <include file="$(find terrain_detection)/launch/sensor_realsense.launch" if="$(arg enable_terrain_pipeline_center)">
+            <arg name="camera"                value="$(arg terrain_center_camera)"/>
+            <arg name="manager"               value="$(arg terrain_center_manager)"/>
+            </include>
+        </group>
 
+        <group ns="terrain_left">
+            <include file="$(find terrain_detection)/launch/sensor_royale_ros.launch" if="$(arg enable_terrain_pipeline_left)">
+            <arg name="camera"                value="$(arg terrain_left_camera)"/>
+            <arg name="serial_number"         value="$(arg terrain_left_serial_number)"/>
+            <arg name="use_case"              value="$(arg terrain_left_use_case)"/>
+            </include>
+        </group>
+
+        <group ns="terrain_right">
+            <include file="$(find terrain_detection)/launch/sensor_royale_ros.launch" if="$(arg enable_terrain_pipeline_right)">
+            <arg name="camera"                value="$(arg terrain_right_camera)"/>
+            <arg name="serial_number"         value="$(arg terrain_right_serial_number)"/>
+            <arg name="use_case"              value="$(arg terrain_right_use_case)"/>
+            </include>
+        </group>
+-->
         <!-- Downsample / crop data -->
         <node pkg="nodelet" type="nodelet" name="terrain_center_vg_x" args="load pcl/VoxelGrid standalone_nodelet" respawn="true" if="$(arg enable_terrain_pipeline_center)">
             <remap from="~input" to="front_down_rgbd_camera/depth/points"/>
@@ -195,7 +228,7 @@
         <!-- Terrain detection: Center RealSense -->
         <node pkg="nodelet" type="nodelet" name="terrain_detection" args="load terrain/terrain_detection_nodelet standalone_nodelet" output="screen" if="$(arg enable_terrain_detection_center)">
             <remap from="pcl_in_1"      to="terrain_center_sor/output" />
-            <remap from="~pcl_out_1"    to="~pcl_out_center" />
+            <remap from="~pcl_out_1"    to="terrain_detection/pcl_out_center" />
             <rosparam>
                 transform_pcl_yaw_1:      0
                 transform_pcl_pitch_1:    .5236
@@ -248,9 +281,7 @@
         <node pkg="nodelet" type="nodelet" name="terrain_center_pcl2laser" args="load pointcloud_to_laserscan/pointcloud_to_laserscan_nodelet standalone_nodelet" output="screen" if="$(arg enable_terrain_pipeline_center)">
             <remap from="cloud_in" to="terrain_detection/pcl_out_center"/>
             <remap from="scan" to="terrain_detection/scan_out_center"/>
-
             <param name="target_frame" type="str" value="$(arg vehicle)/base_link" />
-
             <param name="min_height" type="double" value="-10.0" />
             <param name="max_height" type="double" value="10.0" />
             <param name="min_range" type="double" value="0" />
