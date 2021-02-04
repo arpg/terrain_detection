@@ -226,7 +226,7 @@
 	    <!-- NOTE: The following warning will appear if SOR filter outputs empty PCL: [pcl::KdTreeFLANN::setInputCloud] Cannot create a KDTree with an empty input cloud! -->
 
         <!-- Terrain detection: Center RealSense -->
-        <node pkg="nodelet" type="nodelet" name="terrain_detection" args="load terrain/terrain_detection_nodelet standalone_nodelet" output="screen" if="$(arg enable_terrain_detection_center)">
+        <node pkg="nodelet" type="nodelet" name="terrain_detection" args="load terrain/terrain_detection_nodelet standalone_nodelet" respawn="true" output="screen" if="$(arg enable_terrain_detection_center)">
             <remap from="pcl_in_1"      to="terrain_center_sor/output" />
             <remap from="~pcl_out_1"    to="terrain_detection/pcl_out_center" />
             <rosparam>
@@ -251,7 +251,7 @@
         </node>
 
         <!-- Terrain detection: Right+Left PicoFlexx -->
-        <node pkg="nodelet" type="nodelet" name="terrain_detection" args="load terrain/terrain_detection_nodelet standalone_nodelet" output="screen" if="$(arg enable_terrain_detection_right_left)">
+        <node pkg="nodelet" type="nodelet" name="terrain_detection" args="load terrain/terrain_detection_nodelet standalone_nodelet" respawn="true" output="screen" if="$(arg enable_terrain_detection_right_left)">
             <remap from="pcl_in_1"      to="terrain_right_sor/output" />
             <remap from="pcl_in_2"      to="terrain_left_sor/output" />
             <remap from="~pcl_out_1"    to="~pcl_out_right" />
@@ -278,7 +278,7 @@
         </node>
 
         <!-- PCL to Laserscan Nodelet -->
-        <node pkg="nodelet" type="nodelet" name="terrain_center_pcl2laser" args="load pointcloud_to_laserscan/pointcloud_to_laserscan_nodelet standalone_nodelet" output="screen" if="$(arg enable_terrain_pipeline_center)">
+        <node pkg="nodelet" type="nodelet" name="terrain_center_pcl2laser" args="load pointcloud_to_laserscan/pointcloud_to_laserscan_nodelet standalone_nodelet" respawn="true" output="screen" if="$(arg enable_terrain_pipeline_center)">
             <remap from="cloud_in" to="terrain_detection/pcl_out_center"/>
             <remap from="scan" to="terrain_detection/scan_out_center"/>
             <param name="target_frame" type="str" value="$(arg vehicle)/base_link" />
@@ -292,7 +292,7 @@
             <param name="use_inf" type="boolean" value="true" />
         </node>
 
-        <node pkg="nodelet" type="nodelet" name="terrain_right_pcl2laser" args="load pointcloud_to_laserscan/pointcloud_to_laserscan_nodelet standalone_nodelet" output="screen" if="$(arg enable_terrain_pipeline_right)">
+        <node pkg="nodelet" type="nodelet" name="terrain_right_pcl2laser" args="load pointcloud_to_laserscan/pointcloud_to_laserscan_nodelet standalone_nodelet" respawn="true" output="screen" if="$(arg enable_terrain_pipeline_right)">
             <remap from="cloud_in" to="terrain_detection/pcl_out_right"/>
             <remap from="scan" to="terrain_detection/scan_out_right"/>
             <param name="target_frame" type="str" value="base_link" />
@@ -306,7 +306,7 @@
             <param name="use_inf" type="boolean" value="true" />
         </node>
 
-        <node pkg="nodelet" type="nodelet" name="terrain_left_pcl2laser" args="load pointcloud_to_laserscan/pointcloud_to_laserscan_nodelet standalone_nodelet" output="screen" if="$(arg enable_terrain_pipeline_left)">
+        <node pkg="nodelet" type="nodelet" name="terrain_left_pcl2laser" args="load pointcloud_to_laserscan/pointcloud_to_laserscan_nodelet standalone_nodelet" respawn="true" output="screen" if="$(arg enable_terrain_pipeline_left)">
             <remap from="cloud_in" to="terrain_detection/pcl_out_left"/>
             <remap from="scan" to="terrain_detection/scan_out_left"/>
             <param name="target_frame" type="str" value="base_link_elevated" />
